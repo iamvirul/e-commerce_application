@@ -1,0 +1,41 @@
+@font-face {
+    font-family: "PlayFairDisplay-Italic";
+    src: url("fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf");
+}
+@font-face {
+    font-family:  "PlayFairDisplay-normal";
+    src: url("fonts/Playfair_Display/static/PlayfairDisplay-Black.ttf");
+}
+
+.signIN{
+    font-family: "PlayFairDisplay-Italic";
+    font-size: 30px;
+    font-weight: 400;
+}
+span{
+    font-family: "PlayFairDisplay-normal";
+}
+button{
+    font-family: "PlayFairDisplay-normal";
+
+}
+.fogot{
+    cursor: pointer;
+}
+.social{
+    cursor: pointer;
+}
+.vedio{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+   min-width: 100%;
+    min-height: 100%;
+}
+.content{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+   
+}
