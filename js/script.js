@@ -18,14 +18,14 @@ function login() {
     var form = new FormData();
     form.append("email", email);
     form.append("password", password);
-    form.append("rememberme",rememberMe);
+    form.append("rememberme", rememberMe);
 
     let xhttps = new XMLHttpRequest();
     xhttps.onreadystatechange = function () {
         if (this.readyState == 4) {
             let text = xhttps.responseText;
             alert(text);
-            if(text == "Success"){
+            if (text == "Success") {
                 window.location = "index.php"
             }
         }
@@ -37,17 +37,17 @@ var forgotPasswordModal;
 function forgotPassword() {
     let email = document.getElementById("email").value;
     var forgotpassword = document.getElementById("forgotpassword");
-                forgotPasswordModal = new bootstrap.Modal(forgotpassword);
-    
+    forgotPasswordModal = new bootstrap.Modal(forgotpassword);
+
     let xhttps = new XMLHttpRequest();
     xhttps.onreadystatechange = function () {
         if (this.readyState == 4) {
             let text = xhttps.responseText;
             // alert(text);
             if (text = "Success") {
-                
+
                 forgotPasswordModal.show();
-            }else{
+            } else {
                 forgotPasswordModal.hide();
                 alert(text);
             }
@@ -56,86 +56,86 @@ function forgotPassword() {
     xhttps.open("POST", "backend/forgotpassword.php?email=" + email, true);
     xhttps.send();
 }
-function verify(){
+function verify() {
     let verification_code = document.getElementById("verification").value;
     let email = document.getElementById("email").value;
     let form = new FormData();
-    form.append("verification_code",verification_code);
-    form.append("email",email);
+    form.append("verification_code", verification_code);
+    form.append("email", email);
 
 
     let xhttps = new XMLHttpRequest();
-    xhttps.onreadystatechange = function(){
-        if(this.readyState == 4){
+    xhttps.onreadystatechange = function () {
+        if (this.readyState == 4) {
             var text = xhttps.responseText;
             // alert(text);
-            if(text == "Your verification code is correct"){
-                document.getElementById("alertverify").classList="text-sucess alert alert-success mt-1 ";
-                document.getElementById("alertverify").innerText= text;
-            }else if (text == "Please type your email in Sign In"){
+            if (text == "Your verification code is correct") {
+                document.getElementById("alertverify").classList = "text-sucess alert alert-success mt-1 ";
+                document.getElementById("alertverify").innerText = text;
+            } else if (text == "Please type your email in Sign In") {
                 window.location.href = "login.php";
                 alert(text);
-            }else{
-                document.getElementById("alertverify").classList="text-danger alert alert-danger mt-1" ;
-                document.getElementById("alertverify").innerText= text;
+            } else {
+                document.getElementById("alertverify").classList = "text-danger alert alert-danger mt-1";
+                document.getElementById("alertverify").innerText = text;
             }
         }
     }
-    xhttps.open("POST","backend/modalverify.php",true);
+    xhttps.open("POST", "backend/modalverify.php", true);
     xhttps.send(form);
 }
-function showpassword(){
-    let newPassword =document.getElementById("newP");
+function showpassword() {
+    let newPassword = document.getElementById("newP");
     document.getElementById("eye");
 
-    if(newPassword.type =="password"){
+    if (newPassword.type == "password") {
         document.getElementById("newP").type = "text";
         document.getElementById("eye").className = "bi bi-eye-fill";
 
-    }else{
+    } else {
         document.getElementById("newP").type = "password";
         document.getElementById("eye").className = "bi bi-eye-slash-fill";
     }
 
 }
-function showpassword1(){
-    let conPassword =document.getElementById("conformP");
+function showpassword1() {
+    let conPassword = document.getElementById("conformP");
     document.getElementById("eye");
 
-    if(conPassword.type =="password"){
+    if (conPassword.type == "password") {
         document.getElementById("conformP").type = "text";
         document.getElementById("eye1").className = "bi bi-eye-fill";
 
-    }else{
+    } else {
         document.getElementById("conformP").type = "password";
         document.getElementById("eye1").className = "bi bi-eye-slash-fill";
     }
 
 }
-function verifier(){
+function verifier() {
     let code = document.getElementById("verification").value;
     let newP = document.getElementById("newP").value;
     let conPassword = document.getElementById("conformP").value;
     let email = document.getElementById("email").value
 
     var form = new FormData();
-    form.append("code",code);
-    form.append("newP",newP);
-    form.append("conPassword",conPassword);
-    form.append("email",email);
+    form.append("code", code);
+    form.append("newP", newP);
+    form.append("conPassword", conPassword);
+    form.append("email", email);
 
     let xhttps = new XMLHttpRequest();
-    xhttps.onreadystatechange = function(){
-        if(this.readyState== 4){
+    xhttps.onreadystatechange = function () {
+        if (this.readyState == 4) {
             var text = xhttps.responseText;
             alert(text);
-            if(text=="sucess"){
+            if (text == "sucess") {
                 forgotPasswordModal.hide();
             }
-            
+
         }
     }
-    xhttps.open("POST","backend/changePassword.php",true);
+    xhttps.open("POST", "backend/changePassword.php", true);
     xhttps.send(form);
 }
 function changeView() {
