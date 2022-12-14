@@ -1,23 +1,46 @@
-<?php
-require_once './google/vendor/autoload.php';
-$clientID = '1054469728660-re2m2vldbbq3qep7o2vdqj7h8cihlgmd.apps.googleusercontent.com';
-$clientSecret = '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';
-$redirectURL = 'http://localhost/viva/index.php';
+<?php 
 
-// creating client request to google
+session_start();
 
-$client = new Google_Client ();
-$client -> setClientId($clientID);
-$client ->setClientSecret($clientSecret);
-$client->setRedirectUri($redirectURL);
-$client->addScope('profile');
-$client->addScope('email');
+$email = $_POST["email"];
+$password = $_POST["password"];
+$rememberme = $_POST["rememberme"];
 
 
-if(isset($_GET['code'])){
-  
+
+if(empty($email)){
+    echo " please enter your email !";
+}elseif(strlen($email)>100){
+    echo " Email must have less than 100 characters!";
+}elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+    echo " Invalid Email !";
+}elseif(empty($password)){
+    echo " please enter your password !";
+}elseif(strlen($password)<8 || strlen($password)>20){
+    echo " your password must between 8-20 characters !";
 }else{
-    echo $client->createAuthUrl(); 
+    require  './lib/connection.php';
 
+    $db = new Database();
+    $rs = $db->search("SELECT * FROM `users` WHERE `email` = '".$email."' AND `password`= '".$password."'");
+     $n = $rs->num_rows;
+     if($n == "1"){
+        echo " Success !";
+        $user = $rs->fetch_assoc();
+        echo $user["fname"];
+        $_SESSION["u"]= $user;
+        
+        
+
+        if($_POST["rememberme"]== "true"){
+            setcookie("email",$email,time()+(60*60*24*365));
+            setcookie("password",$password,time()+(60*60*24*365));
+        }else{
+            setcookie("email","",time()-1);
+            setcookie("password","",time()-1);
+        }
+
+     }else{
+        echo " Invalid email or Password !";
+     }
 }
-?>
