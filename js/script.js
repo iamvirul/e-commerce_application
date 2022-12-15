@@ -1,8 +1,8 @@
 function Googlelogin() {
-    var xhttps = new XMLHttpRequest();
+    let xhttps = new XMLHttpRequest();
     xhttps.onreadystatechange = function () {
         if (this.readyState == 4) {
-            var text = xhttps.responseText;
+            let text = xhttps.responseText;
             // alert(text);
             window.location.href = text;
         }
@@ -15,7 +15,7 @@ function login() {
     let password = document.getElementById("password").value;
     let rememberMe = document.getElementById("rememberme").checked;
 
-    var form = new FormData();
+    let form = new FormData();
     form.append("email", email);
     form.append("password", password);
     form.append("rememberme", rememberMe);
@@ -33,10 +33,10 @@ function login() {
     xhttps.open("POST", "backend/loginP.php", true);
     xhttps.send(form);
 }
-var forgotPasswordModal;
+let forgotPasswordModal;
 function forgotPassword() {
     let email = document.getElementById("email").value;
-    var forgotpassword = document.getElementById("forgotpassword");
+    let forgotpassword = document.getElementById("forgotpassword");
     forgotPasswordModal = new bootstrap.Modal(forgotpassword);
 
     let xhttps = new XMLHttpRequest();
@@ -67,7 +67,7 @@ function verify() {
     let xhttps = new XMLHttpRequest();
     xhttps.onreadystatechange = function () {
         if (this.readyState == 4) {
-            var text = xhttps.responseText;
+            let text = xhttps.responseText;
             // alert(text);
             if (text == "Your verification code is correct") {
                 document.getElementById("alertverify").classList = "text-sucess alert alert-success mt-1 ";
@@ -118,7 +118,7 @@ function verifier() {
     let conPassword = document.getElementById("conformP").value;
     let email = document.getElementById("email").value
 
-    var form = new FormData();
+    let form = new FormData();
     form.append("code", code);
     form.append("newP", newP);
     form.append("conPassword", conPassword);
@@ -127,7 +127,7 @@ function verifier() {
     let xhttps = new XMLHttpRequest();
     xhttps.onreadystatechange = function () {
         if (this.readyState == 4) {
-            var text = xhttps.responseText;
+            let text = xhttps.responseText;
             alert(text);
             if (text == "sucess") {
                 forgotPasswordModal.hide();
@@ -140,10 +140,48 @@ function verifier() {
 }
 function changeView() {
 
-    var signUpBox = document.getElementById("signUpBox");
-    var signInBox = document.getElementById("signInBox");
+    let signUpBox = document.getElementById("signUpBox");
+    let signInBox = document.getElementById("signInBox");
 
     signUpBox.classList.toggle("d-none");
     signInBox.classList.toggle("d-none");
 
 }
+function signUp(){
+    let email = document.getElementById("email1").value;
+    let gender = document.getElementById("gender").value;
+    let mobile = document.getElementById("mobile").value;
+    let password = document.getElementById("password1").value;
+    let fname = document.getElementById("fname").value;
+    let lname = document.getElementById("lname").value;
+
+    let form = new FormData();
+    form.append("email",email);
+    form.append("gender",gender);
+    form.append("mobile",mobile);
+    form.append("password",password);
+    form.append("fname",fname);
+    form.append("lname",lname);
+
+
+    let xhttps = new XMLHttpRequest();
+    xhttps.onreadystatechange = function(){
+        if(this.readyState == 4){
+            let text = xhttps.responseText;
+            alert(text);
+            if(text = "success"){
+                changeView();
+                document.getElementById("warningBox").classList = "col-12 alert alert-success text-center"
+                document.getElementById("signupWarning").innerText = text;
+            }else{
+                document.getElementById("warningBox").classList = "col-12 alert alert-danger text-center"
+                 document.getElementById("signupWarning").innerText = text;
+            }
+        }
+    }
+    xhttps.open("POST","backend/signupP.php",true);
+    xhttps.send(form);
+
+   
+}
+   

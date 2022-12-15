@@ -21,7 +21,7 @@ if(empty($fname)){
 }elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)){
     echo " Invalid Email !";
 }elseif(empty($password)){
-    echo " Please eneter your password !";
+    echo " Please enter your password !";
 }elseif(strlen($password)<8 || strlen($password)>20){
     echo " Your password must be between 8-20 characters.";
 }elseif(empty($mobile)){
@@ -32,10 +32,10 @@ if(empty($fname)){
 elseif(!preg_match("/07[0,1,2,3,4,5,6,7,8][0-9]/",$mobile)){
     echo(" Invalid mobile number ! ");
 }else{
-    require  './lib/connection.php';
+    require "./lib/connection.php";
 
 $db = new Database();
-$rs = $db->search("SELECT * FROM `user` WHERE `email` = '".$email."' OR `mobile`='".$mobile."'");
+$rs = $db->search("SELECT * FROM `users` WHERE `email` = '".$email."' OR `mobile`='".$mobile."'");
 $n = $rs->num_rows;
 // echo $n;
 
@@ -47,9 +47,9 @@ if($n==1){
     $date ->setTimezone($time_zone);
     $d = $date-> format("Y-m-d H-i-s");
 
-   $db->insert("INSERT INTO `user`
-   (`email`,`fname`,`lname`,`password`,`mobile`,`join_date`,`status`,`gender_id`)VALUES
-   ('".$email."','".$fname."','".$lname."','".$password."','".$mobile."','".$d."','1','".$gender."')");
+   $db->insert("INSERT INTO `users`
+   (`email`,`fname`,`lname`,`password`,`mobile`,`joined_date`,`gender_id`,`status`)VALUES
+   ('".$email."','".$fname."','".$lname."','".$password."','".$mobile."','".$d."','".$gender."','1')");
     
     echo " success";
 }
