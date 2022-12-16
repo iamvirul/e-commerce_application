@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -44,10 +45,10 @@
                         <h6 class="text-uppercase fw-bold mb-4">
                             <i class="fas fa-gem me-3"></i>Shop.online
                         </h6>
-                        <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
-                        </p>
+                       <span>
+                       Here we are the shop.online.com &trade; to support you for accomplish your dessire by selling high
+                        quality foods and make you happy.
+                       </span>
                     </div>
 
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -55,13 +56,13 @@
                             Useful links
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Home</a>
+                            <a href="home" class="text-reset">Home</a>
                         </p>
                         <p>
                             <a href="#!" class="text-reset">Profile</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">chat</a>
+                            <a href="cart" class="text-reset">chat</a>
                         </p>
                         <p>
                             <a href="#!" class="text-reset">SignOut</a>
@@ -69,13 +70,13 @@
                     </div>
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-                        <p>
-                            <i class="fas fa-envelope me-3"></i>
-                            info@example.com
-                        </p>
-                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                        <span><i class="fas fa-home me-3 mt-1"></i>107,Hirana Road,Gangula,Panadura </span><br>
+                        <span>
+                            <i class="fas fa-envelope me-3 mt-1"></i>
+                            shop.online@gmail.com
+                        </span><br>
+                        <span><i class="fas fa-phone me-3 mt-1"></i> 0382238645</span><br>
+                        <span><i class="fas fa-print me-3 mt-1"></i> 0702760054</span><br>
                     </div>
                 </div>
             </div>

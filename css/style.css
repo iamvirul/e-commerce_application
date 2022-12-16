@@ -62,3 +62,11 @@ cursor: pointer;
 .imgtop:hover{
     transform: scale(1.1);
 }
+.pt{
+    font-family: 'Lobster', cursive;
+    color: black;
+    font-size: large;
+}
+a{
+    font-family: "PlayFairDisplay-normal";
+}

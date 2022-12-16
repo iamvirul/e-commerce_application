@@ -1,0 +1,7 @@
+RewriteEngine on  
+  
+RewriteRule ^HOME  index.php [NC,L]
+RewriteRule ^CART  cart.php [NC,L]
+RewriteRule ^PRODUCT  product.php [NC,L] 
+RewriteRule ^LOGIN  login.php [NC,L] 
+

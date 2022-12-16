@@ -1,46 +1,34 @@
-<?php 
-
+<?php
 session_start();
-
 $email = $_POST["email"];
 $password = $_POST["password"];
 $rememberme = $_POST["rememberme"];
 
+require_once './lib/connection.php';
 
 
-if(empty($email)){
+
+if (empty($email)) {
     echo " please enter your email !";
-}elseif(strlen($email)>100){
+} elseif (strlen($email) > 100) {
     echo " Email must have less than 100 characters!";
-}elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo " Invalid Email !";
-}elseif(empty($password)){
+} elseif (empty($password)) {
     echo " please enter your password !";
-}elseif(strlen($password)<8 || strlen($password)>20){
+} elseif (strlen($password) < 8 || strlen($password) > 20) {
     echo " your password must between 8-20 characters !";
-}else{
-    require  './lib/connection.php';
-
+} else {
+    // echo $password;
+    // echo $email;
     $db = new Database();
-    $rs = $db->search("SELECT * FROM `users` WHERE `email` = '".$email."' AND `password`= '".$password."'");
-     $n = $rs->num_rows;
-     if($n == "1"){
-        echo " Success !";
-        $user = $rs->fetch_assoc();
-        echo $user["fname"];
-        $_SESSION["u"]= $user;
-        
-        
+    $rs = $db->search("SELECT * FROM `users` WHERE `email` = '".$email."' AND `password` = '".$password."'");
+    $user_num = $rs->num_rows;
 
-        if($_POST["rememberme"]== "true"){
-            setcookie("email",$email,time()+(60*60*24*365));
-            setcookie("password",$password,time()+(60*60*24*365));
-        }else{
-            setcookie("email","",time()-1);
-            setcookie("password","",time()-1);
-        }
+    if($user_num == 1){
+        echo "Success";
+    $user_data = $rs->fetch_assoc();
+        $_SESSION["user"] = $user_data;
+    }
 
-     }else{
-        echo " Invalid email or Password !";
-     }
 }
