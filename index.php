@@ -14,12 +14,15 @@
 
 <body>
     <?php
+
+
     include 'header.php';
     ?>
     <div class=" container-fluid">
         <hr />
         <hr />
         <hr />
+        <hr>
         <div class=" col-12" id="basicSearchResults">
             <div class="row">
                 <div class=" col-12 d-none d-lg-block">
@@ -54,8 +57,56 @@
                 </div>
             </div>
         </div>
-       
- 
+        <div class=" col-12">
+            <div class=" row ms-4">
+                <?php
+                require_once 'backend/lib/connection.php';
+                $db = new Database();
+                $catagory_rs = $db->search("SELECT * FROM `catagory`");
+                $catagory_num = $catagory_rs->num_rows;
+
+                for ($x = 0; $x < $catagory_num; $x++) {
+                    $catagory_data = $catagory_rs->fetch_assoc();
+                ?>
+                    <span class="fs-4 fw-bolder"><?php echo $catagory_data["catogory"] ?></span>
+                    <hr class=" col-11 g-1">
+
+
+                    <div class=" col-12">
+                        <div class=" row">
+                            <?php
+                            $product_rs = $db->search("SELECT * FROM `product` WHERE `catagory_id` = '" . $catagory_data["id"] . "' ORDER BY `added_date` DESC LIMIT 4 OFFSET 0");
+                            $product_num = $product_rs->num_rows;
+                            for ($y = 0; $y < $product_num; $y++) {
+                                $product_data = $product_rs->fetch_assoc();
+                                $img_rs = $db->search("SELECT * FROM `img` WHERE `product_id` = '" . $product_data["id"] . "'");
+                                $img_data = $img_rs->fetch_assoc();
+                            ?>
+                                <div class="card me-1 mt-1" style="width: 21rem;">
+                                    <img src="<?php echo $img_data["path"] ?>" class="card-img-top imgtop" alt="..." style="height: 180px;" >
+                                    <div class="card-body">
+                                        <span class="card-title fs-5"><?php echo $product_data["title"] ?></span> &nbsp;&nbsp;&nbsp;&nbsp; <span class=" text-end heart"><i class="bi bi-suit-heart"></i></span><br>
+                                        <span class=" text-muted">Price:-Rs.<?php echo $product_data["price"]?>.00</span>&nbsp;|&nbsp;<span class=" text-muted">Delivery fee:-Rs.<?php echo $product_data["delevery_fee_colombo"]?>/=</span>
+                                        <div class=" col-12 text-center">
+                                            <a href="#" class="btn btn-success  mt-3">Order Now</a>
+                                            <a href="#" class="btn btn-danger mt-3">Add to card</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
+                        </div>
+                    </div>
+                <?php
+                }
+
+                ?>
+            </div>
+        </div>
+
     </div>
     </div>
 

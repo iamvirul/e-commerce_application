@@ -56,3 +56,9 @@ h4{
     font-family: "PlayFairDisplay-normal";
     font-weight: 400;
 }
+.heart{
+cursor: pointer;
+}
+.imgtop:hover{
+    transform: scale(1.1);
+}
