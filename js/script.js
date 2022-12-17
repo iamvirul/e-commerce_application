@@ -24,9 +24,8 @@ function login() {
     xhttps.onreadystatechange = function () {
         if (this.readyState == 4) {
             let text = xhttps.responseText;
-            alert(text);
             if (text == "Success") {
-                window.location = "index.php"
+                window.location = "home"
             }
         }
     }
@@ -183,5 +182,20 @@ function signUp(){
     xhttps.send(form);
 
    
+}
+function addcart(ProductId){
+    let xhttps = new XMLHttpRequest();
+    xhttps.onreadystatechange = function(){
+        if(this.readyState == 4){
+            let text = xhttps.responseText;
+            if(text == "0"){
+                window.location = "login";
+            }else{
+                alert(text);
+            }
+        }
+    }
+    xhttps.open("GET","backend/cartP.php?ProductId="+ProductId,true);
+    xhttps.send();
 }
    

@@ -1,5 +1,6 @@
 <?php
-session_start()
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,34 +28,36 @@ session_start()
             <div class=" col-12 mt-3">
                 <div class=" row">
                     <div class="col-6 col-lg-7">
-                        <div class="card mb-3 ms-2" style="max-width: 760px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="img/product_img/kungChiken.webp" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <?php
+                        require_once 'backend/lib/connection.php';
+                        $db = new Database();
+                        $user_email = $_SESSION["user"]["email"];
+                        $cart_rs = $db->search("SELECT * FROM `cart` WHERE `users_email` = '" . $user_email . "' ");
+                        $cart_num = $cart_rs->num_rows;
+                        for ($x = 0; $x < $cart_num; $x++) {
+                            $cart_data = $cart_rs->fetch_assoc();
+                            $product_rs = $db->search("SELECT * FROM `product` WHERE `id` = '".$cart_data["product_id"]."'");
+                            $product_data = $product_rs->fetch_assoc();
+                            $img_rs = $db->search("SELECT * FROM `img` WHERE `product_id` = '".$cart_data["product_id"]."'");
+                            $img_data = $img_rs->fetch_assoc();
+                        ?>
+                            <div class="card mb-3 ms-2" style="max-width: 760px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="<?php echo $img_data["path"]?>" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?php echo $product_data["title"] ?></h5>
+                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card mb-3 ms-2" style="max-width: 760px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="img/product_img/kungChiken.webp" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div class=" col-6 col-lg-5">
                         <div class="card" style="max-width: 500px;">
@@ -65,30 +68,30 @@ session_start()
                                 <h5 class="card-title">Summary of food items</h5>
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="col-9">
+                                        <div class="col-6 col-lg-9">
                                             <span class="card-text">Sum of food prices</span><br>
                                             <span class="card-text">delevary fees</span><br>
                                         </div>
-                                        <div class="col-3 text-end">
-                                            <span>Rs 1000.00</span><br>
-                                            <span class="text-danger">Rs 100/=</span>
+                                        <div class="col-6 col-lg-3 text-end">
+                                            <span>Rs1000/=</span><br>
+                                            <span class="text-danger mt-md-5">Rs100/=</span>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="col-12 mb-3">
                                         <div class="row">
-                                            <div class=" col-9">
-                                            <span class="card-text">Net price</span><br>
+                                            <div class=" col-lg-9 col-6">
+                                                <span class="card-text">Net price</span><br>
                                             </div>
-                                            <div class="col-3 text-end">
-                                            <span class="card-text text-success">Rs 1100/=</span><br>
+                                            <div class="col-lg-3 col-6 text-end">
+                                                <span class="card-text text-success">Rs 1100/=</span><br>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-primary font-monospace">Go to check out</a>
-                                <a href="home" class="btn btn-warning font-monospace ">Continue shopping</a>
+                                <a href="#" class="btn btn-primary font-monospace mt-1">Go to check out</a>
+                                <a href="home" class="btn btn-warning font-monospace mt-1 ">Continue shopping</a>
 
                             </div>
                         </div>

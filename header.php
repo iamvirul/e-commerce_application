@@ -29,7 +29,17 @@
                 $db = new Database();
                 ?>
                 <div class="col-9 text-end d-none d-lg-block">
-                    <span class=" fs-6">HI <span class="fs-6 userd text-danger text-capitalize"><?php echo $_SESSION["user"]["lname"]?></span></span>
+                    <?php
+                    if(isset($_SESSION["user"])){
+                        ?>
+                    <span class=" fs-6 fw-bold">Welcome <span class="fs-6 userd text-danger text-capitalize"><?php echo $_SESSION["user"]["lname"]?></span></span>
+                        <?php
+                    }else{
+                        ?>
+                    <span class=" fs-6">Welcome<span class="fs-6 userd text-danger text-capitalize">User</span></span>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <span class="navbar-toggler-icon"></span>
@@ -60,7 +70,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#"><i class="fa-solid fa-screwdriver-wrench"></i> Contact Admin</a></li>
                                     <hr class="dropdown-divider">
-                                    <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-right-from-bracket text-danger"></i> Log Out</a></li>
+                                    <li><a class="dropdown-item text-danger" href="backend/signout.php"><i class="fa-solid fa-right-from-bracket text-danger"></i> Log Out</a></li>
                                 </ul>
                             </li>
                         </ul>

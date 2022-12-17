@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
+
 <body>
     <?php
     include 'header.php';
@@ -96,9 +97,8 @@
                                     <span class="card-title fs-5"><?php echo $product_data["title"] ?></span> &nbsp;&nbsp;&nbsp;&nbsp; <span class=" text-end heart"><i class="bi bi-suit-heart"></i></span><br>
                                     <span class=" text-muted">Price:-Rs.<?php echo $product_data["price"] ?>.00</span>&nbsp;|&nbsp;<span class=" text-muted">Delivery fee:-Rs.<?php echo $product_data["delevery_fee_colombo"] ?>/=</span>
                                     <div class=" col-12 text-center">
-                                        <a href="#" class="btn btn-success  mt-3">Order Now</a>
-                                        <a href="#" class="btn btn-danger mt-3">Add to card</a>
-
+                                        <button class="btn btn-success mt-3">Order Now</button>
+                                        <button class="btn btn-danger mt-3" onclick="addcart(<?php echo $product_data['id']; ?>);">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
